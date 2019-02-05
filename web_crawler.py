@@ -147,12 +147,14 @@ def site_map(URL):
     num_record_in_dict = 0
     t = map_one_site(URL)
     dictionary[URL] = t
+    sett = t["links"]
     while num_record_in_dict != len(dictionary):
         num_record_in_dict = len(dictionary)
-        for link in t["links"]:
+        set1 = set()
+        for link in sett:
             if link not in dictionary:
                 t = map_one_site(link)
-                if t == "critical":
-                    break
+                set1.update(t["links"])
                 dictionary[link] = t
+        sett = set1
     return dictionary
