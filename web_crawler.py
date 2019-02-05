@@ -101,11 +101,11 @@ def map_one_site(URL):
         "title":title,
         "links":set(links)
         }
-        return [URL, dictionary]
+        return dictionary
     except:
         print("critical error, file = sys.stderr")
         dictionary = {"title": "critical error", "links": set()}
-        return[URL, dictionary]
+        return dictionary
 
 
 def site_map(URL):
@@ -146,13 +146,13 @@ def site_map(URL):
     dictionary = {}
     num_record_in_dict = 0
     t = map_one_site(URL)
-    dictionary[t[0]] = t[1]
+    dictionary[URL] = t
     while num_record_in_dict != len(dictionary):
         num_record_in_dict = len(dictionary)
-        for link in t[1]["links"]:
+        for link in t["links"]:
             if link not in dictionary:
                 t = map_one_site(link)
                 if t == "critical":
                     break
-                dictionary[t[0]] = t[1]
+                dictionary[link] = t
     return dictionary
