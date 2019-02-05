@@ -103,8 +103,9 @@ def map_one_site(URL):
         }
         return [URL, dictionary]
     except:
-        print("critical error", file=sys.stderr)
-        return "critical"
+        print("critical error, file = sys.stderr")
+        dictionary = {"title": "critical error", "links": set()}
+        return[URL, dictionary]
 
 
 def site_map(URL):
