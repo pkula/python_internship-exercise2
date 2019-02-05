@@ -86,23 +86,29 @@ def map_one_site(URL):
         print("critical error", file=sys.stderr)
 
 
+
+
 def site_map(URL):
     dictionary = {}
+    num_record_in_dict = 0
     t = map_one_site(URL)
     dictionary[t[0]] = t[1]
-    print(dictionary)
+    while num_record_in_dict != len(dictionary):
+        num_record_in_dict = len(dictionary)
+        for link in t[1]["links"]:
+            if link not in dictionary:
+                t = map_one_site(link)
+                dictionary[t[0]] = t[1]
+    for rec in dictionary:
+        print(rec)
+        print(dictionary[rec])
+        print("\n")
 
 
 
-site_map("krkmeble.pl")
-print("\n")
+
+
+
+#site_map("krkmeble.pl")
 site_map("http://0.0.0.0:8000")
-print("\n")
-site_map("http://0.0.0.0:8000/site.html")
-print("\n")
-site_map("http://0.0.0.0:8000/example.html")
-print("\n")
-site_map("http://0.0.0.0:8000/site/subsite.html")
-print("\n")
-site_map("http://0.0.0.0:8000/site/other_site.html")
-print("\n")
+
